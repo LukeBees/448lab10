@@ -1,0 +1,31 @@
+<html>
+<body>
+	<form action="ViewUserPosts.php" method="post">
+	<label>Please select a user to check</label>
+	<?php
+		$mysqli = new mysqli("mysql.eecs.ku.edu","lukebeesley","fischer","lukebeesley");
+		
+		echo "<select name=\"uname\">";
+		
+		$queue="SELECT user_id FROM Users";	
+
+		if($result = $mysqli->query($queue))
+		{
+			while($row = $result->fetch_assoc())
+			{
+				echo "<option value=\"" , $row["user_id"] , "\">";
+				echo $row["user_id"];
+				echo "</option>";
+			}
+			$result->free();
+		}
+
+		echo "</select>";
+
+		echo "<input type=\"submit\" value=\"Submit\">";
+		
+		$mysqli->close();
+	?>
+	</form>
+</body>
+<html>
